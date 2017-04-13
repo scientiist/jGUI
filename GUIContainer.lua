@@ -1,8 +1,8 @@
 --[[
 	GUIContainer Class
 
-	getChildren() : table<GUIObject>
-	getParent() : GUIObject
+	table<GUIObject> getChildren(),
+	GUIObject parent,
 
 
 ]]--
@@ -25,19 +25,25 @@ setmetatable(GUIContainer, {
 function GUIContainer:_init()
 	
 	Object._init(self) -- call the base class constructor
-	table.insert(GUIContainer.__inheritance, "GUIContainer")
+	table.insert(self.__inheritance, "GUIContainer")
 	self._children = {}
 
 	-- public variables
 	self.Parent = {}
 end
 
+function GUIContainer:_renderchildren()
+	for inc, obj in pairs(self._children) do
+		obj:_render()
+	end
+end
+
 function GUIContainer:_render()
-	return self.value + self.value2
+	self._renderchildren()
 end
 
 function GUIContainer:getChildren()
-
+	return self._children
 end
 
 
