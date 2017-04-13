@@ -1,7 +1,3 @@
---[[
-	RGBColor DataType
-]]--
-
 local RGBColor = {}
 
 function RGBColor:_init()
@@ -11,12 +7,13 @@ function RGBColor:_init()
 	return o
 end
 
+
 function RGBColor:new(r, g, b, a)
 	local s = RGBColor:_init()
-	s._red = (r or 0)
-	s._green = (g or 0)
-	s._blue = (b or 0)
-	s._alpha = (a or 0)
+	s.red = (r or 0)
+	s.green = (g or 0)
+	s.blue = (b or 0)
+	s.alpha = (a or 0)
 	return s
 end
 
