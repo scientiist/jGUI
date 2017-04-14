@@ -20,19 +20,19 @@ function GUIObject:_init()
 	
 	GUIContainer._init(self) -- call the base class constructor
 	table.insert(self.__inheritance, "GUIObject")
-	self._children = {}
+	self.children = {}
 
 	-- public variables
-	self.Parent = {}
-	self.BackgroundColor = RGBColor:new(255,255,255)
+	self.parent = nil
+	self.backgroundColor = RGBColor:new(255,255,255)
 end
 
-function GUIObject:_render()
-	self._renderchildren()
+function GUIObject:render()
+	self:renderchildren()
 end
 
 function GUIObject:getChildren()
-	return self._children
+	return self.children
 end
 
 
