@@ -27,25 +27,25 @@ end
 
 function Vector2D.add(vec1, vec2)
 	if type(vec2) == "number" then
-		return Vector2D(vec1.x + vec2, vec1.y + vec2)
+		return Vector2D.new(vec1.x + vec2, vec1.y + vec2)
 	else
-		return Vector2D(vec1.x + vec2.x, vec1.y + vec2.y)
+		return Vector2D.new(vec1.x + vec2.x, vec1.y + vec2.y)
 	end
 end
 
 function Vector2D.subtract(vec1, vec2)
 	if type(vec2) == "number" then
-		return Vector2D(vec1.x - vec2, vec1.y - vec2)
+		return Vector2D.new(vec1.x - vec2, vec1.y - vec2)
 	else
-		return Vector2D(vec1.x - vec2.x, vec1.y - vec2.y)
+		return Vector2D.new(vec1.x - vec2.x, vec1.y - vec2.y)
 	end
 end
 
 function Vector2D.multiply(vec1, vec2)
 	if type(vec2) == "number" then
-		return Vector2D(vec1.x * vec2, vec1.y * vec2)
+		return Vector2D.new(vec1.x * vec2, vec1.y * vec2)
 	else
-		return Vector2D(vec1.x * vec2.x, vec1.y * vec2.y)
+		return Vector2D.new(vec1.x * vec2.x, vec1.y * vec2.y)
 	end
 end
 
