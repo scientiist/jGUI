@@ -26,24 +26,26 @@ function GUIContainer:_init()
 	
 	Object._init(self) -- call the base class constructor
 	table.insert(self.__inheritance, "GUIContainer")
-	self._children = {}
-
-	-- public variables
-	self.Parent = {}
+	self.children = {}
 end
 
-function GUIContainer:_renderchildren()
-	for inc, obj in pairs(self._children) do
-		obj:_render()
+function GUIContainer:renderchildren()
+
+	for inc, obj in pairs(self.children) do
+		obj:render()
 	end
 end
 
-function GUIContainer:_render()
-	self._renderchildren()
+function GUIContainer:render()
+	self:renderchildren()
+end
+
+function GUIContainer:update(dt)
+
 end
 
 function GUIContainer:getChildren()
-	return self._children
+	return self.children
 end
 
 
