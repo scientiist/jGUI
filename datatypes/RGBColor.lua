@@ -10,4 +10,8 @@ function RGBColor.new(r, g, b, a)
 	return self
 end
 
+function RGBColor:toTable()
+	return {self.r, self.g, self.b, self.a}
+end
+
 return RGBColor
