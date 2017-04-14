@@ -31,23 +31,31 @@ function Frame:_init()
 	self.children = {}
 
 	-- public variables
-	self.parent = {}
-	self.backgroundColor = RGBColor:new(255,255,255)
+	self.parent = nil
+	self.backgroundColor = RGBColor.new(255,255,255)
 	self.border = 2
-	self.borderColor = RGBColor:new(0,0,0)
-	self.size = Vector2D:new(100,30)
-	self.position = Vector2D:new(50,50)
+	self.borderColor = RGBColor.new(0,0,0)
+	self.size = Vector2D.new(300,150)
+	self.position = Vector2D.new(50,50)
+
+	RGBColor:new(0,0,255)
 end
 
-function Frame:_render()
-	self._renderchildren()
+function Frame:render()
+	
 
 	-- border
-	love.graphics.setColor(self.backgroundColor.r, self.backgroundColor.g)
+	
+	love.graphics.setColor(self.borderColor.r, self.borderColor.g, self.borderColor.b)
 	love.graphics.rectangle("fill", self.position.x-self.border, self.position.y-self.border, self.size.x+self.border*2, self.size.y+self.border*2)
 
 	-- background
+	print(self.backgroundColor.b)
+	love.graphics.setColor(self.backgroundColor.r, self.backgroundColor.g, self.backgroundColor.b)
 	love.graphics.rectangle("fill", self.position.x, self.position.y, self.size.x, self.size.y)
+	
+	
+	self:renderchildren()
 end
 
 function Frame:getChildren()
@@ -73,6 +81,17 @@ end
 function Frame:setSize(size, scale)
 	if scale == nil or scale == false then
 		self.size = size
+	end
+end
+
+function Frame:setParent(parent)
+	self.parent = parent
+	table.insert(parent.children, self)
+	
+end
+
+function Frame:getParent()
+	return self.parent
 end
 
 
