@@ -46,12 +46,11 @@ function Frame:render()
 
 	-- border
 	
-	love.graphics.setColor(self.borderColor.r, self.borderColor.g, self.borderColor.b)
+	love.graphics.setColor(self.borderColor:toTable())
 	love.graphics.rectangle("fill", self.position.x-self.border, self.position.y-self.border, self.size.x+self.border*2, self.size.y+self.border*2)
 
 	-- background
-	print(self.backgroundColor.b)
-	love.graphics.setColor(self.backgroundColor.r, self.backgroundColor.g, self.backgroundColor.b)
+	love.graphics.setColor(self.backgroundColor:toTable())
 	love.graphics.rectangle("fill", self.position.x, self.position.y, self.size.x, self.size.y)
 	
 	
