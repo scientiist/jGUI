@@ -1,8 +1,17 @@
 # Documentation
 
-All "class" objects are created via ClassName()
+# DataTypes
 
-## GUIContainer class
+## Vector2D
+## Creation:
+```lua
+    Vector2D.new(x, y) -- returns new object
+```
+
+All "class" objects are created via ClassName()
+# Classes
+
+## GUIContainer
 ## Methods:
 ### render() : nil
 Renders the GUIContainer (use in love.draw only)
@@ -10,3 +19,7 @@ Renders the GUIContainer (use in love.draw only)
 Updates the GUIContainer (use in love.update only)
 ### getChildren() : table<GUIObject>
 Returns list of children.
+
+## Fram class
+## Methods:
+### getBorder() : Vector2D
