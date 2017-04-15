@@ -4,25 +4,30 @@
 
 ## Vector2D
 ### Creation:
-Vector2D.new(number x, number y)
+#### Vector2D.new(number x, number y) : Vector2D
+Returns a new Vector2D with the given values
 ### Methods:
 #### Vector2D.add(Vector2D x, number y) : Vector2D
 #### Vector2D.add(Vector2D x, Vector2D y) : Vector2D
 Performs addition on the given arguments and returns a new vector.
 #### Vector2D.subtract(Vector2D x, number y) : Vector2D
 #### Vector2D.subtract(Vector2D x, Vector2D y) : Vector2D
-
+Performs subtraction on the given arguments and returns a new vector.
 #### Vector2D.multiply(Vector2D x, number y) : Vector2D
 #### Vector2D.multiply(Vector2D x, Vector2D y) : Vector2D
-
+Performs multiplication on the given arguments and returns a new vector.
 #### Vector2D.divide(Vector2D x, number y) : Vector2D
 #### Vector2D.divide(Vector2D x, Vector2D y) : Vector2D
+Performs division on the given arguments and returns a new vector.
 
 ## RGBColor
 ### Creation:
-RGBColor.new()
-RGBColor.new(number r, number g, number b)
-RGBColor.new(number r, number g, number b, number a)
+#### RGBColor.new() : RGBColor
+Returns a black, and opaque RGBColor.
+#### RGBColor.new(number r, number g, number b) : RGBColor
+Returns an opaque RGBColor with the given values.
+#### RGBColor.new(number r, number g, number b, number a) : RGBColor
+Returns an RGBColor with the given values.
 
 
 # Classes
