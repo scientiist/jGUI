@@ -1,10 +1,10 @@
 --[[
 	Frame class - Frame()
 		table<GUIObject> getChildren()
-		void setSize(Vector2D size, bool scale)
-		void setPosition(Vector2D size, bool scale)
-		Vector2D getSize()
-		Vector2D getPosition()
+		void setSize(Vector2D offset, Vector2D scale)
+		void setPosition(Vector2D offset, Vector2D scale)
+		Vector2D, Vector2D getSize()
+		Vector2D, Vector2D getPosition()
 ]]--
 
 local RGBColor = require("datatypes/RGBColor")
@@ -35,54 +35,54 @@ function Frame:_init()
 	self.backgroundColor = RGBColor.new(255,255,255)
 	self.border = 2
 	self.borderColor = RGBColor.new(0,0,0)
-	self.size = Vector2D.new(300,150)
-	self.position = Vector2D.new(50,50)
-
-	RGBColor:new(0,0,255)
+	self.sizeOffset = Vector2D.new(300,150)
+	self.sizeScale = Vector2D.new(0,0)
+	self.positionOffset = Vector2D.new(50,50)
+	self.positionScale = Vector2D.new(0,0)
+	self.absoluteSize = Vector2D.new(0,0)
+	self.absolutePosition = Vector2D.new(0,0)
 end
 
 function Frame:render()
-	
+
+	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
+	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
 
 	-- border
 	
 	love.graphics.setColor(self.borderColor:toTable())
-	love.graphics.rectangle("fill", self.position.x-self.border, self.position.y-self.border, self.size.x+self.border*2, self.size.y+self.border*2)
+	love.graphics.rectangle("fill", self.absolutePosition.x-self.border, self.absolutePosition.y-self.border, self.absoluteSize.x+self.border*2, self.absoluteSize.y+self.border*2)
 
 	-- background
 	love.graphics.setColor(self.backgroundColor:toTable())
-	love.graphics.rectangle("fill", self.position.x, self.position.y, self.size.x, self.size.y)
+	love.graphics.rectangle("fill", self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y)
 	
 	
 	self:renderchildren()
 end
 
-function Frame:getChildren()
-	return self.children
+function Frame:getBorder()
+	return self.border
 end
 
 function Frame:getPosition()
-
+	return self.sizeOffset, self.sizeScale
 end
+
 
 function Frame:getSize()
-
+	return self.sizeOffset, self.sizeScale
 end
 
-function Frame:setPosition(pos, scale)
-	if scale == nil or scale == false then
-		self.position = pos
-	else
-		self.position = Vector2D.multiply(pos, Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight()))
-	end
+function Frame:setPosition(offset, scale)
+	self.positionOffset = offset
+	self.positionScale = scale
 end
 
-function Frame:setSize(size, scale)
-	if scale == nil or scale == false then
-		self.size = size
-	else
-		self.size = Vector2D.multiply(size, Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight()))
-	end
+
+function Frame:setSize(offset, scale)
+	self.sizeOffset = offset
+	self.sizeScale = scale
 end
 
 function Frame:setParent(parent)
