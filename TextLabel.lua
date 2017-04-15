@@ -1,15 +1,16 @@
 --[[
 	TextLabel class - TextLabel()
+
 		table<GUIObject> getChildren()
-		void setSize(Vector2D size, bool scale)
-		void setPosition(Vector2D size, bool scale)
-		Vector2D getSize()
-		Vector2D getPosition()
+		void setSize(Vector2D offset, Vector2D scale)
+		void setPosition(Vector2D offset, Vector2D scale)
+		Vector2D, Vector2D getSize()
+		Vector2D, Vector2D getPosition()
 ]]--
 
 local RGBColor = require("datatypes/RGBColor")
 local Vector2D = require("datatypes/Vector2D")
-local GUIObject = require("GUIObject")
+local Frame = require("Frame")
 
 local TextLabel = {}
 
@@ -31,38 +32,38 @@ function TextLabel:_init()
 	self.children = {}
 
 	-- public variables
-	self.text = ""
-	self.textAlign = "left"
-	self.textColor = RGBColor.new(0,0,0)
 	self.parent = nil
 	self.backgroundColor = RGBColor.new(255,255,255)
 	self.border = 2
 	self.borderColor = RGBColor.new(0,0,0)
-	self.size = Vector2D.new(300,150)
-	self.position = Vector2D.new(50,50)
+	self.sizeOffset = Vector2D.new(300,150)
+	self.sizeScale = Vector2D.new(0,0)
+	self.positionOffset = Vector2D.new(50,50)
+	self.positionScale = Vector2D.new(0,0)
+	self.absoluteSize = Vector2D.new(0,0)
+	self.absolutePosition = Vector2D.new(0,0)
 
-	RGBColor:new(0,0,255)
+	self.text = "TextLabel"
+	self.textColor = RGBColor.new(128, 128, 128)
 end
 
 function TextLabel:render()
-	
+
+	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
+	self.absolutePosition = Vector2D.new(self.parent.absolutePosition.x + self.positionOffset.x + self.parent.absoluteSize.x  * self.positionScale.x,  self.parent.absolutePosition.y + self.positionOffset.y + self.parent.absoluteSize.y  * self.positionScale.y)
 
 	-- border
 	
 	love.graphics.setColor(self.borderColor:toTable())
-	love.graphics.rectangle("fill", self.position.x-self.border, self.position.y-self.border, self.size.x+self.border*2, self.size.y+self.border*2)
+	love.graphics.rectangle("fill", self.absolutePosition.x-self.border, self.absolutePosition.y-self.border, self.absoluteSize.x+self.border*2, self.absoluteSize.y+self.border*2)
 
 	-- background
 	love.graphics.setColor(self.backgroundColor:toTable())
-	love.graphics.rectangle("fill", self.position.x, self.position.y, self.size.x, self.size.y)
-
+	love.graphics.rectangle("fill", self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y)
+	
 	love.graphics.setColor(self.textColor:toTable())
-	love.graphics.printf(self.text, self.position.x, self.position.y, self.size.x, self.textAlign)
-	
-	
+	love.graphics.printf(self.text, self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, "center")
 	self:renderchildren()
 end
 
-
-
-return Frame
+return TextLabel
