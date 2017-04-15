@@ -1,12 +1,12 @@
-### docs
+# Documentation
 
 All "class" objects are created via ClassName()
 
-### GUIContainer class
+## GUIContainer class
 ## Methods:
-# render() : nil
+### render() : nil
 Renders the GUIContainer (use in love.draw only)
-# update(number deltatime) : nil
+### update(number deltatime) : nil
 Updates the GUIContainer (use in love.update only)
-# getChildren() : table<GUIObject>
+### getChildren() : table<GUIObject>
 Returns list of children.
