@@ -77,8 +77,7 @@ Returns the _actual_ pixel coordinates of the position
 
 ## TextLabel
 Displays text
-### Inherits from Frame
-
+Inherits from Frame
 ### Methods:
 #### setText(string text) : nil
 Sets the displayed text
