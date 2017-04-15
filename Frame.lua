@@ -78,7 +78,7 @@ function Frame:setPosition(offset, scale)
 	self.positionOffset = offset
 	self.positionScale = scale
 end
-
+-- in linux right now
 
 function Frame:setSize(offset, scale)
 	self.sizeOffset = offset

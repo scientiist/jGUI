@@ -44,7 +44,11 @@ function TextLabel:_init()
 	self.absolutePosition = Vector2D.new(0,0)
 
 	self.text = "TextLabel"
-	self.textColor = RGBColor.new(128, 128, 128)
+	self.textColor = RGBColor.new(0, 0, 0)
+	self.textAlign = "left"
+	self.fontSize = 12
+	self.fontName = "Ubuntu"
+	self.font = love.graphics.newFont(self.fontName, self.fontSize)
 end
 
 function TextLabel:render()
@@ -61,9 +65,49 @@ function TextLabel:render()
 	love.graphics.setColor(self.backgroundColor:toTable())
 	love.graphics.rectangle("fill", self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y)
 	
+	love.graphics.setFont(self.font)
 	love.graphics.setColor(self.textColor:toTable())
-	love.graphics.printf(self.text, self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, "center")
+	love.graphics.printf(self.text, self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.textAlign)
 	self:renderchildren()
+end
+
+function TextLabel:getText()
+
+end
+
+function TextLabel:getTextColor()
+
+end
+
+function TextLabel:getTextAlign()
+
+end
+
+function TextLabel:getTextSize()
+
+end
+
+function TextLabel:setText(text)
+
+end
+
+function TextLabel:setTextColor(color)
+
+end
+
+function TextLabel:setTextAlign(alignment)
+
+end
+
+function TextLabel:setTextSize(size)
+	self.fontSize = size
+	self.font = love.graphics.newFont(self.fontName, self.fontSize)
+end
+
+function TextLabel:setFont(font)
+	self.fontName = font
+	self.font = love.graphics.newFont(self.fontName, self.fontSize)
+
 end
 
 return TextLabel
