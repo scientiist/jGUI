@@ -26,6 +26,9 @@ local quitBtn = Button()
     quitBtn:setSize(Vector2D.new(0, 0),Vector2D.new(0.2, 0.05))
     quitBtn:setText("Niggers")
 
+    quitBtn.mouseEnterEvent:connect(function() print("nigga") end)
+    quitBtn.mouseUpEvent:connect(function() os.exit() end)
+
 function love.load()
     love.window.setTitle("jInterface test")
     love.window.setMode(1280, 768, {resizable = true})

@@ -67,7 +67,7 @@ function Frame:render()
 	self:renderchildren()
 end
 
-function Frame:update()
+function Frame:update(dt)
 	local mX, mY = love.mouse.getX(), love.mouse.getY()
 	local sX, sY, sW, sH = self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y
 	if (mX > sX and mX < (sX + sW)) and (mY > sY and mY < (sY + sY))  then
@@ -84,6 +84,8 @@ function Frame:update()
 	end
 	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
 	self.absolutePosition = Vector2D.new(0, 0)
+
+	self:updatechildren(dt)
 end
 
 function Frame:getBackgroundColor()

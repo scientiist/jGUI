@@ -26,6 +26,13 @@ function GUIObject:_init()
 	self.backgroundColor = RGBColor:new(255,255,255)
 end
 
+
+function GUIObject:update(dt)
+	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
+	self.absolutePosition = Vector2D.new(0, 0)
+	self:updatechildren(dt)
+end
+
 function GUIObject:render()
 	self:renderchildren()
 end
@@ -51,9 +58,10 @@ function GUIObject:renderchildren()
 	end
 end
 
-function GUIObject:update(dt)
-	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
-	self.absolutePosition = Vector2D.new(0, 0)
+function GUIObject:updatechildren(dt)
+	for inc, obj in pairs(self.children) do
+		obj:update(dt)
+	end
 end
 
 return GUIObject
