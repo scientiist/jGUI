@@ -19,4 +19,4 @@ function Event:fire(...)
 	self.func(...)
 end
 
-return RGBColor
+return Event

@@ -7,7 +7,7 @@
 		Vector2D, Vector2D getSize()
 		Vector2D, Vector2D getPosition()
 ]]--
-
+local Event = require("library/core/Event")
 local RGBColor = require("library/datatypes/RGBColor")
 local Vector2D = require("library/datatypes/Vector2D")
 local Frame = require("library/objects/Frame")
@@ -28,7 +28,7 @@ setmetatable(TextLabel, {
 function TextLabel:_init()
 	
 	Frame._init(self) -- call the base class constructor
-	table.insert(self.__inheritance, "TextLabel")
+	table.insert(self.__inheritance, "Label")
 	self.children = {}
 
 	-- public variables
@@ -37,7 +37,7 @@ function TextLabel:_init()
 	self.border = 2
 	self.borderColor = RGBColor.new(0,0,0)
 	self.sizeOffset = Vector2D.new(300,150)
-	self.sizeScale = Vector2D.new(0,0)
+	self.sizeScale = Vector2D.new(1,0)
 	self.positionOffset = Vector2D.new(50,50)
 	self.positionScale = Vector2D.new(0,0)
 	self.absoluteSize = Vector2D.new(0,0)

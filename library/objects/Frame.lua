@@ -6,6 +6,7 @@
 		Vector2D, Vector2D getSize()
 		Vector2D, Vector2D getPosition()
 ]]--
+local Event = require("library/core/Event")
 
 local RGBColor = require("library/datatypes/RGBColor")
 local Vector2D = require("library/datatypes/Vector2D")
@@ -85,8 +86,16 @@ function Frame:update()
 	self.absolutePosition = Vector2D.new(0, 0)
 end
 
+function Frame:getBackgroundColor()
+	return self.backgroundColor
+end
+
 function Frame:getBorder()
 	return self.border
+end
+
+function Frame:getBorderColor()
+	return self.borderColor
 end
 
 function Frame:getPosition()
@@ -96,6 +105,10 @@ end
 
 function Frame:getSize()
 	return self.sizeOffset, self.sizeScale
+end
+
+function Frame:setBackgroundColor(color)
+	self.backgroundColor = color
 end
 
 function Frame:setBorderColor(color)
