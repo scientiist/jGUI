@@ -42,6 +42,8 @@ function TextLabel:_init()
 	self.positionScale = Vector2D.new(0,0)
 	self.absoluteSize = Vector2D.new(0,0)
 	self.absolutePosition = Vector2D.new(0,0)
+	self.mouseEnterEvent = Event.initialize()
+	self.mouseLeaveEvent = Event.initialize()
 
 	self.text = "TextLabel"
 	self.textColor = RGBColor.new(0, 0, 0)
@@ -72,31 +74,31 @@ function TextLabel:render()
 end
 
 function TextLabel:getText()
-
+	return self.text
 end
 
 function TextLabel:getTextColor()
-
+	return self.textColor
 end
 
 function TextLabel:getTextAlign()
-
+	return self.textAlign
 end
 
 function TextLabel:getTextSize()
-
+	return self.getTextSize
 end
 
 function TextLabel:setText(text)
-	self.text = text
+	 self.text = text
 end
 
 function TextLabel:setTextColor(color)
-
+	self.textColor = color
 end
 
 function TextLabel:setTextAlign(alignment)
-
+	self.textAlign = alignment
 end
 
 function TextLabel:setTextSize(size)
