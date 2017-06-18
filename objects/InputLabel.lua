@@ -1,4 +1,4 @@
-local Label = require("Label")
+local Label = require("objects/Label")
 local Event = require("core/Event")
 local RGBColor = require("datatypes/RGBColor")
 local Vector2D = require("datatypes/Vector2D")
@@ -24,15 +24,19 @@ function InputLabel:_init()
 
 
     self.hasFocus = false
+    self.mouseDown = false
+    self.mouseIn = false
     self.inputBeganEvent = Event.initialize()
     self.inputEndedEvent = Event.initialize()
+    self.mouseDownEvent = Event.initialize()
+    self.mouseUpEvent = Event.initialize()
+    self.shownText = self.text
+    self.timer = 0
 
 end
 
 function InputLabel:render()
-    self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
-	self.absolutePosition = Vector2D.new(self.parent.absolutePosition.x + self.positionOffset.x + self.parent.absoluteSize.x  * self.positionScale.x,  self.parent.absolutePosition.y + self.positionOffset.y + self.parent.absoluteSize.y  * self.positionScale.y)
-
+  
 	-- border
 	
 	love.graphics.setColor(self.borderColor:toTable())
@@ -44,20 +48,74 @@ function InputLabel:render()
 	
 	love.graphics.setFont(self.font)
 	love.graphics.setColor(self.textColor:toTable())
-	love.graphics.printf(self.text, self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.textAlign)
+	love.graphics.printf(self.shownText, self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.textAlign)
 	self:renderchildren()
+
+
 end
 
 function InputLabel:update(delta)
+
+    self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
+	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
+
+
+    self.timer = self.timer + delta
+    if self.hasFocus then
+        if self.timer > 0.5 then
+            self.shownText = self.text .. "_"
+            self.timer = 0
+        elseif self.timer < 0.25 then
+            self.shownText = self.text .. "_"
+        else
+            self.shownText = self.text
+        end
+    else
+        self.shownText = self.text
+    end
+
     if love.keyboard.isDown("escape") then
         self.hasFocus = false
-        self.inputEventEnded:fire(false)
+        self.inputEndedEvent:fire(false)
     end
 
     if love.keyboard.isDown("enter") then
         self.hasFocus = false
         self.inputEndedEvent:fire(true)
     end
+
+    local mX, mY = love.mouse.getX(), love.mouse.getY()
+	local sX, sY, sW, sH = self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y
+	if (mX > sX and mX < (sX + sW)) and (mY > sY and mY < (sY + sH))  then
+        print("mouse inside")
+		if self.mouseIn == false then
+			self.mouseIn = true
+			self.mouseEnterEvent:fire()
+		
+		end
+	else
+		if self.mouseIn == true then
+			self.mouseIn = false
+			self.mouseLeaveEvent:fire()
+		end
+	end
+
+
+    if self.mouseIn then
+        if self.mouseDown == false and love.mouse.isDown(1) then
+        print("kike")
+            self.mouseDown = true
+            self.hasFocus = true
+            self.inputBeganEvent:fire()
+            self.mouseDownEvent:fire()
+        elseif (self.mouseDown == true) and love.mouse.isDown(1) == false then
+            self.mouseDown = false
+            self.mouseUpEvent:fire()
+        end
+
+    end
+	self:updatechildren(dt)
+
 end
 
 function InputLabel:setFocus(mode)
@@ -74,12 +132,19 @@ end
 
 function InputLabel:input(char)
     if self.hasFocus then
-        self.text = self.text + input
+        self.text = self.text .. char
     end
 end
 
---[[
-function love.textinput(t)
-    
+function InputLabel:keypress(char)
+    if char == "backspace" then
+        if self.hasFocus then
+            self.text = self.text:sub(1, -2)
+        end
+    end
 end
+--[[
+
 ]]
+
+return InputLabel

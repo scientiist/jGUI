@@ -54,8 +54,9 @@ function Button:update(dt)
         end
 
     end
-	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
-	self.absolutePosition = Vector2D.new(0, 0)
+	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
+	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
+
 
     self:updatechildren(dt)
 end

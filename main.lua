@@ -1,18 +1,15 @@
-local GUIContainer = require("library/objects/GUIContainer")
-local Frame = require("library/objects/Frame")
-local Vector2D = require("library/datatypes/Vector2D")
-local RGBColor = require("library/datatypes/RGBColor")
-local TextLabel = require("library/objects/Label")
-local Button = require("library/objects/Button")
+require("loader")
 
 local menu = GUIContainer()
 
 local frame = Frame()
     frame:setParent(menu)
-    frame:setSize(Vector2D.new(10, 30), Vector2D.new(0.5, 0.5))
-    frame:setBackgroundColor(RGBColor.new(255,255,255,128))
+    frame:setSize(Vector2D.new(0, 0), Vector2D.new(1, 1))
+    frame:setPosition(Vector2D.new(0,0), Vector2D.new(0,0))
+    frame:setBackgroundColor(RGBColor.new(255,255,255))
 
-local label = TextLabel()
+
+--[[local label = Label()
     label:setParent(frame)
     label:setPosition(Vector2D.new(0, 0), Vector2D.new(0.1, 0.3))
     label:setSize(Vector2D.new(0, 0), Vector2D.new(0.5, 0.5))
@@ -28,14 +25,28 @@ local quitBtn = Button()
 
     quitBtn.mouseEnterEvent:connect(function() print("nigga") end)
     quitBtn.mouseUpEvent:connect(function() os.exit() end)
+]]
+
+local inputLabel = InputLabel()
+    inputLabel:setParent(frame)
+    inputLabel:setSize(Vector2D.new(0,0), Vector2D.new(0.1, 0.5))
 
 function love.load()
+    love.keyboard.setKeyRepeat(true)
     love.window.setTitle("jInterface test")
     love.window.setMode(1280, 768, {resizable = true})
 end
 
 function love.update(dt)
     menu:update(dt)
+end
+
+function love.textinput(t)
+    inputLabel:input(t)
+end
+
+function love.keypressed(k)
+    inputLabel:keypress(k)
 end
 
 function love.draw()

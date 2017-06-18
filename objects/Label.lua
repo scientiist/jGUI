@@ -55,8 +55,6 @@ end
 
 function TextLabel:render()
 
-	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
-	self.absolutePosition = Vector2D.new(self.parent.absolutePosition.x + self.positionOffset.x + self.parent.absoluteSize.x  * self.positionScale.x,  self.parent.absolutePosition.y + self.positionOffset.y + self.parent.absoluteSize.y  * self.positionScale.y)
 
 	-- border
 	

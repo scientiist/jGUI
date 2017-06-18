@@ -50,10 +50,6 @@ function Frame:_init()
 end
 
 function Frame:render()
-
-	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
-	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
-
 	-- border
 	
 	love.graphics.setColor(self.borderColor:toTable())
@@ -68,9 +64,12 @@ function Frame:render()
 end
 
 function Frame:update(dt)
+	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
+	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
+
 	local mX, mY = love.mouse.getX(), love.mouse.getY()
 	local sX, sY, sW, sH = self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y
-	if (mX > sX and mX < (sX + sW)) and (mY > sY and mY < (sY + sY))  then
+	if (mX > sX and mX < (sX + sW)) and (mY > sY and mY < (sY + sH))  then
 		if self.mouseIn == false then
 			self.mouseIn = true
 			self.mouseEnterEvent:fire()
@@ -82,8 +81,6 @@ function Frame:update(dt)
 			self.mouseLeaveEvent:fire()
 		end
 	end
-	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
-	self.absolutePosition = Vector2D.new(0, 0)
 
 	self:updatechildren(dt)
 end

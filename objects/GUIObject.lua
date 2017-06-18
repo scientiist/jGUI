@@ -24,12 +24,13 @@ function GUIObject:_init()
 	-- public variables
 	self.parent = nil
 	self.backgroundColor = RGBColor:new(255,255,255)
+	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
+	self.absolutePosition = Vector2D.new(0, 0)
 end
 
 
 function GUIObject:update(dt)
 	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
-	self.absolutePosition = Vector2D.new(0, 0)
 	self:updatechildren(dt)
 end
 
