@@ -1,7 +1,7 @@
 local Object = require("core/Object")
 local Vector2D = require("datatypes/Vector2D")
 local RGBColor = require("datatypes/RGBColor")
-
+local Event = require("core/Event")
 local GUIObject = {}
 
 GUIObject.__index = GUIObject

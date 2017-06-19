@@ -53,7 +53,12 @@ local inputLabel = InputLabel()
         inputLabel:setText("Try again!")
     end)
 
+local picture = ImageLabel()
+    picture:setParent(frame)
 
+    picture:setImage(love.graphics.newImage("cock.jpg"))
+    picture:setPosition(Vector2D.new(0, 0), Vector2D.new(0.1,0.1))
+    picture:setSize(Vector2D.new(0, 0),Vector2D.new(0.5, 0.5))
 
 
 function love.load()
