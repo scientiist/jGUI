@@ -34,6 +34,7 @@ setmetatable(ImageLabel, {
 function ImageLabel:_init()
 	
 	Frame._init(self) -- call the base class constructor
+	table.insert(self.__inheritance, "Label")
 	table.insert(self.__inheritance, "ImageLabel")
 	self.children = {}
 

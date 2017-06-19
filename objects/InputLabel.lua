@@ -77,7 +77,7 @@ function InputLabel:update(delta)
         self.inputEndedEvent:fire(false)
     end
 
-    if love.keyboard.isDown("enter") then
+    if love.keyboard.isDown("return") then
         self.hasFocus = false
         self.inputEndedEvent:fire(true)
     end
