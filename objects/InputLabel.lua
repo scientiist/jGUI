@@ -115,6 +115,7 @@ function InputLabel:input(char)
     if self.hasFocus then
         self.text = self.text .. char
     end
+    self:inputchildren(char)
 end
 
 function InputLabel:keypress(char)
@@ -123,6 +124,7 @@ function InputLabel:keypress(char)
             self.text = self.text:sub(1, -2)
         end
     end
+    self:keypresschildren(char)
 end
 --[[
 

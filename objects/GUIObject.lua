@@ -68,4 +68,28 @@ function GUIObject:updatechildren(dt)
 	end
 end
 
+function GUIObject:input(k)
+	self:inputchildren(k)
+end
+
+function GUIObject:keypress(k)
+	self:keypresschildren(k)
+end
+
+function GUIObject:inputchildren(k)
+	for inc, obj in pairs(self.children) do
+		obj:input(k)
+	end
+end
+
+
+function GUIObject:keypresschildren(k)
+	for inc, obj in pairs(self.children) do
+		obj:keypress(dt)
+	end
+end
+
+
+
+
 return GUIObject

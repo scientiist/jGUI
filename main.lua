@@ -52,14 +52,14 @@ local inputLabel = InputLabel()
         print(inputLabel:getText())
         inputLabel:setText("Try again!")
     end)
-
+--[[
 local picture = ImageLabel()
     picture:setParent(frame)
 
     picture:setImage(love.graphics.newImage("cock.jpg"))
     picture:setPosition(Vector2D.new(0, 0), Vector2D.new(0.1,0.1))
     picture:setSize(Vector2D.new(0, 0),Vector2D.new(0.5, 0.5))
-
+]]
 
 function love.load()
     love.keyboard.setKeyRepeat(true)
@@ -72,11 +72,11 @@ function love.update(dt)
 end
 
 function love.textinput(t)
-    inputLabel:input(t)
+    menu:input(t)
 end
 
 function love.keypressed(k)
-    inputLabel:keypress(k)
+    menu:keypress(k)
 end
 
 function love.draw()
