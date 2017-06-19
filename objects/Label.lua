@@ -49,8 +49,8 @@ function TextLabel:_init()
 	self.textColor = RGBColor.new(0, 0, 0)
 	self.textAlign = "left"
 	self.fontSize = 15
-	self.fontName = "Ubuntu-L.ttf"
-	self.font = love.graphics.newFont(self.fontName, self.fontSize)
+	self.fontName = nil
+	self.font = love.graphics.newFont(self.fontSize)
 end
 
 function TextLabel:render()
@@ -101,7 +101,12 @@ end
 
 function TextLabel:setTextSize(size)
 	self.fontSize = size
-	self.font = love.graphics.newFont(self.fontName, self.fontSize)
+
+	if self.fontName then
+		self.font = love.graphics.newFont(self.fontName, self.fontSize)
+	else
+		self.font = love.graphics.newFont(self.fontSize)
+	end	
 end
 
 function TextLabel:setFont(font)
