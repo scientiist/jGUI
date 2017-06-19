@@ -4,32 +4,57 @@ local menu = GUIContainer()
 
 local frame = Frame()
     frame:setParent(menu)
-    frame:setSize(Vector2D.new(0, 0), Vector2D.new(1, 1))
-    frame:setPosition(Vector2D.new(0,0), Vector2D.new(0,0))
+    frame:setSize(Vector2D.new(0, 0), Vector2D.new(0.8, 0.8))
+    frame:setPosition(Vector2D.new(0,0), Vector2D.new(0.1,0.1))
     frame:setBackgroundColor(RGBColor.new(255,255,255))
+    frame:setBorder(4)
 
 
---[[local label = Label()
+local label = Label()
     label:setParent(frame)
-    label:setPosition(Vector2D.new(0, 0), Vector2D.new(0.1, 0.3))
-    label:setSize(Vector2D.new(0, 0), Vector2D.new(0.5, 0.5))
+    label:setPosition(Vector2D.new(0, 0), Vector2D.new(0, 0))
+    label:setSize(Vector2D.new(0, 0), Vector2D.new(0.2, 0.025))
     label:setTextSize(16)
-    label:setBorderColor(RGBColor.new(128,128,255, 128))
-    label:setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+    label:setBorderColor(RGBColor.new(0,0,0, 128))
+    label:setText("I am a label, I display text!")
 
 local quitBtn = Button()
     quitBtn:setParent(frame)
     quitBtn:setPosition(Vector2D.new(0, 0), Vector2D.new(0.5,0.2))
-    quitBtn:setSize(Vector2D.new(0, 0),Vector2D.new(0.2, 0.05))
-    quitBtn:setText("Niggers")
+    quitBtn:setSize(Vector2D.new(0, 0),Vector2D.new(0.3, 0.06))
+    quitBtn:setText("Click me to close!")
+    quitBtn:setFont("Ubuntu-L.ttf")
+    quitBtn:setTextSize(32)
+    quitBtn:setBorderColor(RGBColor.new(255,0,0))
+    quitBtn:setBackgroundColor(RGBColor.new(255, 255, 255))
 
-    quitBtn.mouseEnterEvent:connect(function() print("nigga") end)
+    quitBtn.mouseEnterEvent:connect(function()
+        quitBtn:setBackgroundColor(RGBColor.new(192, 192, 192))
+    end)
+    quitBtn.mouseLeaveEvent:connect(function()
+        quitBtn:setBackgroundColor(RGBColor.new(255, 255, 255))
+    end)
+
     quitBtn.mouseUpEvent:connect(function() os.exit() end)
-]]
+
 
 local inputLabel = InputLabel()
     inputLabel:setParent(frame)
-    inputLabel:setSize(Vector2D.new(0,0), Vector2D.new(0.1, 0.5))
+    inputLabel:setPosition(Vector2D.new(0,0), Vector2D.new(0.1, 0.3))
+    inputLabel:setSize(Vector2D.new(0,0), Vector2D.new(0.2, 0.06))
+    inputLabel:setText("Click to type!")
+
+    inputLabel.inputBeganEvent:connect(function()
+        inputLabel:setText("")
+    end)
+
+    inputLabel.inputEndedEvent:connect(function()
+        print(inputLabel:getText())
+        inputLabel:setText("Try again!")
+    end)
+
+
+
 
 function love.load()
     love.keyboard.setKeyRepeat(true)

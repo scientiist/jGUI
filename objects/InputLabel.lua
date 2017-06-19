@@ -55,11 +55,9 @@ function InputLabel:render()
 end
 
 function InputLabel:update(delta)
-
-    self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
-	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
-
-
+    self:calculateAbsolutes()
+    self:checkMouse()
+    
     self.timer = self.timer + delta
     if self.hasFocus then
         if self.timer > 0.5 then
@@ -83,23 +81,6 @@ function InputLabel:update(delta)
         self.hasFocus = false
         self.inputEndedEvent:fire(true)
     end
-
-    local mX, mY = love.mouse.getX(), love.mouse.getY()
-	local sX, sY, sW, sH = self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y
-	if (mX > sX and mX < (sX + sW)) and (mY > sY and mY < (sY + sH))  then
-        print("mouse inside")
-		if self.mouseIn == false then
-			self.mouseIn = true
-			self.mouseEnterEvent:fire()
-		
-		end
-	else
-		if self.mouseIn == true then
-			self.mouseIn = false
-			self.mouseLeaveEvent:fire()
-		end
-	end
-
 
     if self.mouseIn then
         if self.mouseDown == false and love.mouse.isDown(1) then

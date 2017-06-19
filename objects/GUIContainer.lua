@@ -28,7 +28,7 @@ function GUIContainer:_init()
 	GUIObject._init(self) -- call the base class constructor
 	table.insert(self.__inheritance, "GUIContainer")
 	self.children = {}
-	
+	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
 
 end
 

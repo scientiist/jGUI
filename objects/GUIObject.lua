@@ -24,7 +24,7 @@ function GUIObject:_init()
 	-- public variables
 	self.parent = nil
 	self.backgroundColor = RGBColor:new(255,255,255)
-	self.absoluteSize = Vector2D.new(love.graphics.getWidth(), love.graphics.getHeight())
+	self.absoluteSize = Vector2D.new(0,0)
 	self.absolutePosition = Vector2D.new(0, 0)
 end
 

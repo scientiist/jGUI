@@ -52,6 +52,7 @@ end
 function Frame:render()
 	-- border
 	
+	
 	love.graphics.setColor(self.borderColor:toTable())
 	love.graphics.rectangle("fill", self.absolutePosition.x-self.border, self.absolutePosition.y-self.border, self.absoluteSize.x+self.border*2, self.absoluteSize.y+self.border*2)
 
@@ -63,10 +64,19 @@ function Frame:render()
 	self:renderchildren()
 end
 
-function Frame:update(dt)
-	self.absoluteSize = Vector2D.new(self.sizeOffset.x + self.parent.absoluteSize.x * self.sizeScale.x, self.sizeOffset.y + self.parent.absoluteSize.y * self.sizeScale.y)
-	self.absolutePosition = Vector2D.new(self.positionOffset.x + self.parent.absolutePosition.x * self.positionScale.x,  self.positionOffset.y + self.parent.absolutePosition.y * self.positionScale.y)
+function Frame:calculateAbsolutes()
+	self.absoluteSize = Vector2D.new(
+		self.sizeOffset.x + (self.parent.absoluteSize.x * self.sizeScale.x),
+		self.sizeOffset.y + (self.parent.absoluteSize.y * self.sizeScale.y)
+	)
 
+	self.absolutePosition = Vector2D.new(
+		self.parent.absolutePosition.x + self.positionOffset.x + (self.parent.absoluteSize.x * self.positionScale.x),
+		self.parent.absolutePosition.y + self.positionOffset.y + (self.parent.absoluteSize.y * self.positionScale.y)
+	)
+end
+
+function Frame:checkMouse()
 	local mX, mY = love.mouse.getX(), love.mouse.getY()
 	local sX, sY, sW, sH = self.absolutePosition.x, self.absolutePosition.y, self.absoluteSize.x, self.absoluteSize.y
 	if (mX > sX and mX < (sX + sW)) and (mY > sY and mY < (sY + sH))  then
@@ -81,6 +91,13 @@ function Frame:update(dt)
 			self.mouseLeaveEvent:fire()
 		end
 	end
+end
+
+function Frame:update(dt)
+
+	self:calculateAbsolutes()
+	self:checkMouse()
+	
 
 	self:updatechildren(dt)
 end
@@ -110,15 +127,21 @@ function Frame:setBackgroundColor(color)
 	self.backgroundColor = color
 end
 
+function Frame:setBorder(px)
+	self.border = px
+end
+
 function Frame:setBorderColor(color)
 	self.borderColor = color
 end
 
 function Frame:setPosition(offset, scale)
+
 	self.positionOffset = offset
+	
 	self.positionScale = scale
 end
--- in linux right now
+
 
 function Frame:setSize(offset, scale)
 	self.sizeOffset = offset
