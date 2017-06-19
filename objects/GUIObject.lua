@@ -26,6 +26,9 @@ function GUIObject:_init()
 	self.backgroundColor = RGBColor:new(255,255,255)
 	self.absoluteSize = Vector2D.new(0,0)
 	self.absolutePosition = Vector2D.new(0, 0)
+
+	self.onRenderEvent = Event.initialize()
+	self.onUpdateEvent = Event.initialize()
 end
 
 
