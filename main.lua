@@ -23,7 +23,6 @@ local quitBtn = Button()
     quitBtn:setPosition(Vector2D.new(0, 0), Vector2D.new(0.5,0.2))
     quitBtn:setSize(Vector2D.new(0, 0),Vector2D.new(0.3, 0.06))
     quitBtn:setText("Click me to close!")
-    quitBtn:setFont("Ubuntu-L.ttf")
     quitBtn:setTextSize(32)
     quitBtn:setBorderColor(RGBColor.new(255,0,0))
     quitBtn:setBackgroundColor(RGBColor.new(255, 255, 255))
@@ -52,6 +51,8 @@ local inputLabel = InputLabel()
         print(inputLabel:getText())
         inputLabel:setText("Try again!")
     end)
+   
+
 --[[
 local picture = ImageLabel()
     picture:setParent(frame)

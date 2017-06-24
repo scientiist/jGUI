@@ -54,9 +54,6 @@ function TextLabel:_init()
 end
 
 function TextLabel:render()
-
-
-	-- border
 	
 	love.graphics.setColor(self.borderColor:toTable())
 	love.graphics.rectangle("fill", self.absolutePosition.x-self.border, self.absolutePosition.y-self.border, self.absoluteSize.x+self.border*2, self.absoluteSize.y+self.border*2)

@@ -82,18 +82,24 @@ function InputLabel:update(delta)
         self.inputEndedEvent:fire(true)
     end
 
-    if self.mouseIn then
-        if self.mouseDown == false and love.mouse.isDown(1) then
+    
+    if self.mouseDown == false and love.mouse.isDown(1) then
+        if self.mouseIn then
         print("kike")
             self.mouseDown = true
             self.hasFocus = true
             self.inputBeganEvent:fire()
             self.mouseDownEvent:fire()
-        elseif (self.mouseDown == true) and love.mouse.isDown(1) == false then
+        else
+            self.hasFocus = false
+            self.inputEndedEvent:fire()
+
+        end
+    end
+
+    if (self.mouseDown == true) and love.mouse.isDown(1) == false then
             self.mouseDown = false
             self.mouseUpEvent:fire()
-        end
-
     end
 	self:updatechildren(dt)
 

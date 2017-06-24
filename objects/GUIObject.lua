@@ -85,7 +85,7 @@ end
 
 function GUIObject:keypresschildren(k)
 	for inc, obj in pairs(self.children) do
-		obj:keypress(dt)
+		obj:keypress(k)
 	end
 end
 
