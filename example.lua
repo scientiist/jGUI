@@ -19,9 +19,9 @@ local quitBtn = Button()
     quitBtn:setParent(frame)
     quitBtn:setPosition(Vector2D.new(0, 0), Vector2D.new(0.5,0.2))
     quitBtn:setSize(Vector2D.new(0, 0),Vector2D.new(0.2, 0.05))
-    quitBtn:setText("Niggers")
+    quitBtn:setText("asoaosoa")
 
-    quitBtn.mouseEnterEvent:connect(function() print("nigga") end)
+    quitBtn.mouseEnterEvent:connect(function() print("asooasoa") end)
     quitBtn.mouseUpEvent:connect(function() os.exit() end)
 
 function love.load()
